@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import searchReducer from './searchReducer';
-import addReducer from './addReducer';
+import reducerBook from '../containers/books/reducerBook';
+import addReducer from '../containers/profile/addReducer';
 
 const globalState = () => {
   return {
@@ -19,7 +19,7 @@ const enhancer = composeEnhancers(
 
 const reducers = combineReducers({
   globalState,
-  searchReducer,
+  reducerBook,
   addReducer
 });
 

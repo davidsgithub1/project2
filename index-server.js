@@ -1,8 +1,8 @@
-import React from 'react'
-import express from 'express'
-import { renderToString } from 'react-dom/server'
-import Menu from './components/Menu'
-import data from './assets/recipes.json'
+var React = require('react');
+var express = requre('express');
+var renderToString = require('react-dom/server').renderToStaticMarkup;
+var Menu = require('./components/Menu');
+var data = require('./assets/recipes.json');
 
 global.React = React
 

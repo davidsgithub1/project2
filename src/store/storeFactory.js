@@ -3,28 +3,26 @@ import thunk from 'redux-thunk';
 import reducerBook from '../containers/books/reducerBook';
 import addReducer from '../containers/profile/addReducer';
 
-const globalState = () => {
-  return {
-    books: []
-  }
-}
-
-const composeEnhancers =
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
-
-const enhancer = composeEnhancers(
-  applyMiddleware(thunk)
-);
-
 const reducers = combineReducers({
-  globalState,
   reducerBook,
   addReducer
 });
 
-const storeFactory = () => {
-  return createStore(reducers, enhancer);
+const saver = store => next => action => {
+    let result = next(action)
+    localStorage['redux-store'] = JSON.stringify(store.getState())
+    return result
 }
 
-export default storeFactory;
+const storeFactory = (initialState) =>
+    // createStore(MainReducer, state);
+    applyMiddleware(saver, thunk)(createStore)(
+        reducers,
+        (localStorage['redux-store']) ?
+            JSON.parse(localStorage['redux-store']) :
+            initialState,
+            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+    )
+
+export default storeFactory

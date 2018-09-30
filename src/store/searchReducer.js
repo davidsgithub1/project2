@@ -1,8 +1,4 @@
-const defaultState = {
-  count: 0
-}
-
-export default (state = defaultState, action) => {
+export default (state, action) => {
   switch(action.type) {   
     default:
       return state;

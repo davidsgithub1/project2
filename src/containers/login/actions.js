@@ -4,17 +4,20 @@ import fetch from 'isomorphic-fetch';
 
 export const loginUser = () => {
   return function(dispatch, getState) {
-    return fetch('//obscure-journey-25228.herokuapp.com/api/friends', {
+    return fetch('http://localhost:3000/islogged', {
 		   method: 'post',
 		   headers:{
 		   	'Accept':'application/json',
 		   	'Content-Type':'application/json'
 		   }
 	  })
-    .then(response => response.json())
-      .then(user => {
-	      	dispatch(userLogged(user))
-      	}
+    .then(response => {
+	    	if(response !== "not"){
+		    	dispatch(userLogged(response))
+	    	}else{
+	    		dispatch(userLoginErr())
+	    	}
+	    }
       )
     }
   }
@@ -27,6 +30,11 @@ export const userLogged = (user) =>
 		logged_user: user,
 	})
 
+export const userLoginErr = () => 
+	({
+		type: C.USER_LOGIN_ERR,
+		login_err: "User is not logged in",
+	})
 
 
 export const userLogOut = () => 

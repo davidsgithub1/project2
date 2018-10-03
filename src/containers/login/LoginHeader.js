@@ -18,7 +18,7 @@ export default function Survey ({
                : 
               <section>
                 <p>Not logged in!</p>
-                <a href = "http://localhost:3000/auth/google"><button>LOGIN</button></a>
+                <button onClick = {login}>LOGIN</button>
               </section>
           }
         </div>

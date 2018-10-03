@@ -12,6 +12,7 @@ export const LoginHeaderWrap = connect(
 	dispatch =>
 		({
 			login(){
+				console.log("Login");
 				dispatch(loginUser());
 			},
 			logout(){

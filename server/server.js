@@ -20,10 +20,6 @@ import indexController from './controllers/index';
 
 import storeFactory from '../src/store/storeFactory';
 
-
-
-
-
 app.use(express.static(publicPath));
 
 routesBooks(app);
@@ -51,8 +47,27 @@ app.get("*", (req, res) => {
   `);
 });
  */
+
+// chat
+app.use('/chat', require('./routesChat'));
+
 Loadable.preloadAll().then(()=>{
   app.listen(port, () => {
     console.log('Server is up ', port);
   });
 })
+
+
+// chat connection
+
+const httpServer = require('http').createServer(app);
+const io = require('socket.io')();
+
+const PORT = 8080;
+
+httpServer.listen(PORT, () => {
+  console.log(`Chat: Running on port ${PORT}`);
+});
+
+//web socket connection
+require('./controllers/chat').listen(httpServer);

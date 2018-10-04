@@ -1,6 +1,5 @@
 import React from 'react';
 import { SuggestionListWrap } from './container';
-import About from '../profile/About';
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -40,7 +39,6 @@ class SearchForm extends React.Component {
   render() {
     return (
       <div>
-        <About />
         <form onSubmit={this.handleOnSubmit}>
           <input
             value={this.state.value}

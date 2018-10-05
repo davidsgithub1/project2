@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 // const connection = require('../config/connection');
 const routsBooks = require('./routsBooks');
-const routsLogin = require('./routesLogin');
+const routesLogin = require('./routesLogin');
 const publicPath = path.join(__dirname, '..', 'build');
 const port = process.env.PORT || 3000;
 
@@ -24,7 +24,7 @@ import storeFactory from '../src/store/storeFactory';
 app.use(express.static(publicPath));
 
 routsBooks(app);
-routsLogin(app);
+routesLogin(app);
 console.log("r u there");
 
 app.use(indexController);

@@ -49,6 +49,7 @@ class SearchForm extends React.Component {
     const { value } = this.state;
     return (
       <div>
+        <About />
         <form onSubmit={this.handleOnSubmit}>
           <input
             value={value}

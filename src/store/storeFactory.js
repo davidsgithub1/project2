@@ -2,10 +2,11 @@ import {createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducerBook from '../containers/books/reducerBook';
 import addReducer from '../containers/profile/addReducer';
-
+import reducerLogin from '../containers/login/reducerLogin';
 const reducers = combineReducers({
   reducerBook,
-  addReducer
+  addReducer,
+  reducerLogin
 });
 
 const saver = store => next => action => {

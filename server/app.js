@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { compose } from 'redux'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
-import routesBooks from './routesBooks';
+//import routsBooks from './routsBooks';
 import App from '../src/App';
 import storeFactory from '../src/store/storeFactory'
 

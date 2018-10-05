@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:src/containers/books/SearchForm.js
-import { SuggestionListWrap } from './container';
-=======
 import { SuggestionListWrap } from '../container';
->>>>>>> 503021c8e4b5edf535d608f8156f39fb14d75474:src/containers/books/UI/SearchForm.js
 
 class SearchForm extends React.Component {
   constructor(props) {

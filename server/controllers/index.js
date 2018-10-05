@@ -7,9 +7,7 @@ const router = express.Router();
 const path = require("path");
 
 const actionIndex = (req, res, next) => {
-    const store = storeFactory(localStorage['redux-store']) ?
-    JSON.parse(localStorage['redux-store']) :
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+    const store = storeFactory();
     renderer(store);
 };
 

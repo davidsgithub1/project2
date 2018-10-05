@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
-import Search from './containers/books/Search';
+import Books from './containers/books/UI/Books';
 import { LoginHeaderWrap } from './containers/login/container';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 const AsyncBooks = Loadable({
-  loader: () => import(/* webpackChunkName: "Search" */ "./containers/books/Search"),
+  loader: () => import(/* webpackChunkName: "Books" */ "./containers/books/UI/Books"),
   loading: () => <div>loading...</div>,
-  modules: ['Search']
+  modules: ['Books']
 })
 
 class App extends Component {

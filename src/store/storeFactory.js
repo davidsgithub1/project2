@@ -42,8 +42,15 @@ const middleware = server => [
     thunk
 ]
 
-const storeFactory = (server = false, initialState) =>
+/* const storeFactory = (server = false, initialState) =>
     // createStore(MainReducer, state);
-    applyMiddleware(...middleware(server),saver, thunk)(createStore)(reducers, initialState)
-
+    applyMiddleware(...middleware(server),saver, thunk)(createStore)(reducers, initialState) */
+    const storeFactory = (initialState) =>
+        // createStore(MainReducer, state);
+    applyMiddleware(saver, thunk)(createStore)(
+    reducers,
+    (localStorage['redux-store']) ?
+    JSON.parse(localStorage['redux-store']) :
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 export default storeFactory

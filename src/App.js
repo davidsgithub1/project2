@@ -4,13 +4,18 @@ import logo from './logo.svg';
 import './App.css';
 import Search from './containers/books/Search';
 import { LoginHeaderWrap } from './containers/login/container';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-      	<Search />
       	<LoginHeaderWrap />
+	     <HashRouter>
+            <Switch>
+              <Route path = "/search" component = {Search}/>
+            </Switch>
+         </HashRouter>
       </div>
     );
   }

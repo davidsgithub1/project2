@@ -3,13 +3,13 @@ import React from 'react';
 const Suggestion = (props) => {
   const hangleOnClick = () => {
     props.getValue(props.info.item);
-    props.setSuggestionChosenToTrue();
-    // props.setInputValue(props.info.item);
+    props.resetBookSuggestions();
   }
-
+  const { item } = props.info;
+  
   return(
     <div>
-      <p onClick={hangleOnClick}>{props.info.item}</p>
+      <p onClick={hangleOnClick}>{item}</p>
     </div>
   )
 }

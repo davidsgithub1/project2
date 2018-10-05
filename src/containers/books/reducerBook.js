@@ -1,27 +1,40 @@
 import { 
-  ADD_BOOK_TITLES,
-  RESET_BOOK_TITLES,
-  TRUE_ISSUGGESTIONCHOSEN,
-  FALSE_ISSUGGESTIONCHOSEN,
+  ADD_BOOK_SUGGESTIONS,
   ADD_BOOKS,
-  // SET_INPUT_VALUE
+  SET_SEARCH_PARAMETER,
+  SET_STATUS_SHOWN,
+  ADD_CURRENT_BOOK_INFO,
+  RESET_BOOK_SUGGESTIONS,
+  RESET_CURRENT_BOOK_INFO,
+  SET_CURR_VALUE,
+  SET_MESSAGE
 } from  './constants';
 
 const defaultState = {
   books:[],
-  bookTitles: [],
+  currentBookInfo: {},
+  suggestions: [],
   isSuggestionChosen: false,
-  // inputValue: '',
-  bookShown: null
+  bookShown: null,
+  searchParameter: 'title', 
+  statusShown: 'available',
+  currValue:'',
+  message:''
 }
 
 export default (state = defaultState, action) => {
   switch(action.type) {
     
-    case ADD_BOOK_TITLES:
+    case ADD_BOOK_SUGGESTIONS:
     return {
       ...state,
-      bookTitles: [...action.bookTitles]
+      suggestions: [...action.suggestions]
+    }
+
+    case ADD_CURRENT_BOOK_INFO:
+    return {
+      ...state,
+      currentBookInfo: action.currentBookInfo
     }
 
     case ADD_BOOKS:
@@ -30,28 +43,40 @@ export default (state = defaultState, action) => {
       books: [...action.books]
     }
 
-    case RESET_BOOK_TITLES:
+    case SET_SEARCH_PARAMETER:
     return {
       ...state,
-      bookTitles: []
+      searchParameter: action.searchParameter
     }
 
-    // case SET_INPUT_VALUE:
-    // return {
-    //   ...state,
-    //   inputValue: action.inputValue
-    // }
-
-    case TRUE_ISSUGGESTIONCHOSEN:
+    case SET_MESSAGE:
     return {
       ...state,
-      isSuggestionChosen: true
+      message: action.message
     }
 
-    case FALSE_ISSUGGESTIONCHOSEN:
+    case SET_STATUS_SHOWN:
     return {
       ...state,
-      isSuggestionChosen: false
+      statusShown: action.statusShown
+    }
+
+    case SET_CURR_VALUE:
+    return {
+      ...state,
+      currValue: action.currValue
+    }
+
+    case RESET_BOOK_SUGGESTIONS:
+    return {
+      ...state,
+      suggestions: []
+    }
+
+    case RESET_CURRENT_BOOK_INFO:
+    return {
+      ...state,
+      currentBookInfo: {}
     }
 
     default:

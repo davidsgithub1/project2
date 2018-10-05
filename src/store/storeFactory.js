@@ -15,15 +15,35 @@ const saver = store => next => action => {
     return result
 }
 
-const storeFactory = (initialState) =>
-    // createStore(MainReducer, state);
-    applyMiddleware(saver, thunk)(createStore)(
-        reducers,
-        (localStorage['redux-store']) ?
-            JSON.parse(localStorage['redux-store']) :
-            initialState,
-            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const clientLogger = store => next => action => {
+    if (action.type) {
+        let result
+        console.groupCollapsed("dispatching", action.type)
+        console.log('prev state', store.getState())
+        console.log('action', action)
+        result = next(action)
+        console.log('next state', store.getState())
+        console.groupEnd()
+        return result
+    } else {
+        return next(action)
+    }
+}
 
-    )
+const serverLogger = store => next => action => {
+    console.log('\n  dispatching server action\n')
+    console.log(action)
+    console.log('\n')
+    return next(action)
+}
+
+const middleware = server => [
+    (server) ? serverLogger : clientLogger,
+    thunk
+]
+
+const storeFactory = (server = false, initialState) =>
+    // createStore(MainReducer, state);
+    applyMiddleware(...middleware(server),saver, thunk)(createStore)(reducers, initialState)
 
 export default storeFactory

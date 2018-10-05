@@ -5,6 +5,13 @@ import './App.css';
 import Search from './containers/books/Search';
 import { LoginHeaderWrap } from './containers/login/container';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import Loadable from 'react-loadable';
+
+const AsyncBooks = Loadable({
+  loader: () => import(/* webpackChunkName: "Search" */ "./containers/books/Search"),
+  loading: () => <div>loading...</div>,
+  modules: ['Search']
+})
 
 class App extends Component {
   render() {
@@ -13,7 +20,7 @@ class App extends Component {
       	<LoginHeaderWrap />
 	     <HashRouter>
             <Switch>
-              <Route path = "/search" component = {Search}/>
+              <Route path = "/search" component = {AsyncBooks}/>
             </Switch>
          </HashRouter>
       </div>

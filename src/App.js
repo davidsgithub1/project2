@@ -20,7 +20,7 @@ class App extends Component {
       	<LoginHeaderWrap />
 	     <HashRouter>
             <Switch>
-              <Route path = "/search" component = {AsyncBooks}/>
+              <Route path = "/" component = {AsyncBooks}/>
             </Switch>
          </HashRouter>
       </div>

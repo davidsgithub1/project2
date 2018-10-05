@@ -11,6 +11,10 @@ const fs = require("fs");
 
 import manifest from '../../build/asset-manifest.json';
 
+const extractAssets = (assets, chunks) => Object.keys(assets)
+.filter(asset => chunks.indexOf(asset.replace('.js', '')) > -1)
+.map(k => assets[k]);
+
 import storeFactory from '../../src/store/storeFactory'
 
 const store = storeFactory();
@@ -37,9 +41,7 @@ var middleware = (store) => (req, res, next) => {
 
         const reduxState = JSON.stringify(store.getState());
 
-        const extractAssets = (assets, chunks) => Object.keys(assets)
-        .filter(asset => chunks.indexOf(asset.replace('.js', '')) > -1)
-        .map(k => assets[k]);
+
 
         // then, after Loadable.Capture
         console.log(extractAssets(manifest, modules));

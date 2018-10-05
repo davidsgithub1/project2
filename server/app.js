@@ -9,21 +9,23 @@ import { renderToString } from 'react-dom/server'
 //import routsBooks from './routsBooks';
 import App from '../src/App';
 import storeFactory from '../src/store/storeFactory'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 /* const staticCSS = fs.readFileSync(path.join(__dirname, '../../dist/assets/bundle.css')) */
 const fileAssets = express.static(path.join(__dirname, '../../dist/assets'))
 
 const serverStore = storeFactory()
 
-/* serverStore.subscribe(() =>
+serverStore.subscribe(() =>
     fs.writeFile(
         path.join(__dirname, '../../data/initialState.json'),
         JSON.stringify(serverStore.getState()),
         error => (error) ? console.log("Error saving state!", error) : null
     )
-) */
+)
 
-/* const buildHTMLPage = ({html, state, css}) => `
+const buildHTMLPage = ({html, state, css}) => `
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,7 +43,7 @@ const serverStore = storeFactory()
     </body>
 </html>
 `
- */
+
 const renderComponentsToHTML = ({url, store}) =>
     ({
         state: store.getState(),
@@ -61,7 +63,7 @@ const makeClientStoreFrom = store => url =>
     })
 
 const htmlResponse = compose(
-    //buildHTMLPage,
+    buildHTMLPage,
     renderComponentsToHTML,
     makeClientStoreFrom(serverStore)
 )
@@ -81,7 +83,7 @@ const addStoreToRequestPipeline = (req, res, next) => {
     next()
 }
 
-export default express()
+module.exports = express()
     .use(bodyParser.json())
     .use(logger)
     .use(fileAssets)

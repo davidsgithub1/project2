@@ -2,7 +2,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 // const connection = require('../config/connection');
-const routesBooks = require('./routesBooks');
+const routsBooks = require('./routsBooks');
+const routsLogin = require('./routesLogin');
 const publicPath = path.join(__dirname, '..', 'build');
 const port = process.env.PORT || 3000;
 
@@ -20,13 +21,11 @@ import indexController from './controllers/index';
 
 import storeFactory from '../src/store/storeFactory';
 
-
-
-
-
 app.use(express.static(publicPath));
 
-routesBooks(app);
+routsBooks(app);
+routsLogin(app);
+console.log("r u there");
 
 app.use(indexController);
 

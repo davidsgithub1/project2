@@ -1,6 +1,5 @@
 import React from 'react';
-import { SuggestionListWrap } from './container';
-import About from '../profile/About';
+import { SuggestionListWrap } from '../container';
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -8,22 +7,28 @@ class SearchForm extends React.Component {
 
     this.state = {
       value: '',
-      values: this.props.bookTitles,
-      isSuggestionChosen: this.props.isSuggestionChosen
+      values: this.props.suggestions
     };
   };
+
+  componentDidMount() {
+    this.props.resetBookSuggestions();
+    this.props.setMessage('');
+  }
 
   getValue = (value) => {
     this.setState(() => ({ value }))
   }
 
   handleOnChange = (e) => {
-    const value = e.target.value;//set value on change, make query 
+    const value = e.target.value;//set value on change, make query
+    const { searchParameter, statusShown } = this.props;
+    
     if (value.trim() !== '') {
-      this.props.setSuggestionChosenToFalse();
-      this.props.getBookTitlesOnChange(value);
+      this.props.getBookSuggestions(value, searchParameter, statusShown);
+      this.props.setMessage('');
     } else if (value.length === 0) {
-      this.props.resetBookTitles();
+      this.props.resetBookSuggestions();
     }
     this.setState(() => ({ value }));
   }
@@ -31,25 +36,28 @@ class SearchForm extends React.Component {
   handleOnSubmit = (e) => {
     e.preventDefault();
     const currentValue = e.target.elements[0].value;
-    if(this.state.value === currentValue) {//make db query only if current input value matches values set on change
-      this.props.getBooks(currentValue)
-    };
+    const { searchParameter, statusShown } = this.props;
+    // const statusShown = this.props.statusShown;
+
+    this.props.setCurrValue(currentValue); 
+    this.props.resetBookSuggestions();
+    this.props.getBooks(currentValue, searchParameter, statusShown)
     this.setState(() => ({value: ''}))
   }
 
   render() {
+    const { value } = this.state;
     return (
       <div>
         <About />
         <form onSubmit={this.handleOnSubmit}>
           <input
-            value={this.state.value}
+            value={value}
             onChange={this.handleOnChange}
           />
-          <button disabled={!this.state.value}>Search</button>
+          <button disabled={!value}>Search</button>
         </form>
         <SuggestionListWrap
-          suggestions={this.values}
           getValue={this.getValue}
         />
       </div>

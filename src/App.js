@@ -6,6 +6,7 @@ import Books from './containers/books/UI/Books';
 import { LoginHeaderWrap } from './containers/login/container';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import ChatBox from '../src/containers/profile/chat/UI/chatbox';
 
 const AsyncBooks = Loadable({
   loader: () => import(/* webpackChunkName: "Books" */ "./containers/books/UI/Books"),
@@ -20,7 +21,7 @@ class App extends Component {
       	<LoginHeaderWrap />
 	     <HashRouter>
             <Switch>
-              <Route path = "/" component = {AsyncBooks}/>
+              <Route path = "/" component = {ChatBox}/>
             </Switch>
          </HashRouter>
       </div>

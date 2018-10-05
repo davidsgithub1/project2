@@ -1,8 +1,8 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { addNewEvent, leaveRoom } from './actionCreators.js'
-import { browserHistory } from 'react-router'
+import { addNewEvent, leaveRoom } from './UI/actionCreators.js'
+//import { browserHistory } from 'react-router'
 
 
 //chat-event types
@@ -56,9 +56,9 @@ class ChatPage extends React.Component {
 		window.addEventListener("beforeunload", this.onUnload)
 
 		//if there's no room_id redirect to home page
-		if(!this.props.chat.room.room_id) {
+/* 		if(!this.props.chat.room.room_id) {
 			browserHistory.push('/');
-		}
+		} */
 
 		switch(window.location.hostname) {
 			case 'localhost': 

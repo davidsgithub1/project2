@@ -1,4 +1,4 @@
-import * as A from './actions';
+import * as A from '../actions';
 
 export const addNewEvent = (messageData) => {
 	return (dispatch) => {

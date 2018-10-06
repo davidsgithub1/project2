@@ -1,9 +1,20 @@
+import { ADD_USER_BOOKS } from './constants';
+
 const defaultState = {
-  numbers: [1,2,3,4]
+  userBooks: [],
+  userId: 1,
+  bookInfo: {}
 }
 
 export default (state = defaultState, action) => {
-  switch(action.type) {   
+  switch(action.type) {  
+    
+    case ADD_USER_BOOKS:
+    return {
+      ...state,
+      userBooks: [...action.userBooks]
+    }
+    
     default:
       return state;
   }
